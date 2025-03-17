@@ -17,68 +17,84 @@
 let anchoAltoRectangulo = (a, b) => a * b;
 
 //Funcion para la velocidad
-let velocidadAmetros = (a) => a*1000;
-let velocidadAmph = (a) => a/1.60934;
+let velocidadAmetros = (a) => a * 1000;
+let velocidadAmph = (a) => a / 1.60934;
 
 //Funcion Factorial 
-function factorial  (a) {
+function factorial(a) {
     //El factorial de 0=1, por eso se hace esta condicion
-    if(a===0) 
+    if (a === 0)
         return 1;
 
     /*Se realiza un bucle for para incrementar el numero en la multiplicacion donde se inicializa en 1 y llega
    hasta el numero ingresado por el usuario
-    */  
-let inicio = 1;
-for(let i = 1; i<=a; i++){
-    inicio *=i;
-   
-}
-//Retorna el valor ya multiplicado 
-return inicio;
+    */
+    let inicio = 1;
+    for (let i = 1; i <= a; i++) {
+        inicio *= i;
+
+    }
+    //Retorna el valor ya multiplicado 
+    return inicio;
 }
 
 //Funcion tabla de multiplicar 
-function tablaMultiplicar (a){
+function tablaMultiplicar(a) {
 
     /*la variable tabla esta vacia para poder recibir el #ingresado por el usuario y crear su tabla
     Se crea la variable i inicializada en 1 para arrangar la tabla de multiplicar, en este caso al incremneto de
     uno en uno hasta 10,se concatenan las instruciones de a = numero ingresado por el usuario e i=el tope de la tabla
     se multiplican dichos valores haciendo asi la tabla de multiplicar
     */
-let tabla=' ';
-for(let i = 1; i<=10 ; i++){
-    tabla += `${a} x ${i} = ${a * i}\n`;
-}
-alert(tabla)
+    let tabla = ' ';
+    for (let i = 1; i <= 10; i++) {
+        tabla += `${a} x ${i} = ${a * i}\n`;
+    }
+    alert(tabla)
 }
 
 //FUncion para el IMC
-function IMC (a,b){
-let imc = a/(b*b);
+function IMC(a, b) {
+    let imc = a / (b * b);
 
-//Condicional para saber el estado del usuario
-if(imc>=30.0){
-alert(`Su IMC  es de ${imc} por lo tanto usted esta en un grado de Obesidad; te recomendamos ir al nutricionista `)
-}else if(imc<=29.9 && imc>=25.0){
-    alert(`Su IMC es de ${imc} por lo tanto usted esta en Sobrepeso`)
-}else if(imc<=24.9 && imc>=18.5){
-    alert(`Su IMC es de ${imc} por lo tanto usted esta en Peso Normal`)
-}else{
-    alert(`Su IMC  es de ${imc} por lo tanto usted esta en Bajo Peso; te recomendamos ir al nutricionista ` )
-}
+    //Condicional para saber el estado del usuario
+    if (imc >= 30.0) {
+        alert(`Su IMC  es de ${imc} por lo tanto usted esta en un grado de Obesidad; te recomendamos ir al nutricionista `)
+    } else if (imc <= 29.9 && imc >= 25.0) {
+        alert(`Su IMC es de ${imc} por lo tanto usted esta en Sobrepeso`)
+    } else if (imc <= 24.9 && imc >= 18.5) {
+        alert(`Su IMC es de ${imc} por lo tanto usted esta en Peso Normal`)
+    } else {
+        alert(`Su IMC  es de ${imc} por lo tanto usted esta en Bajo Peso; te recomendamos ir al nutricionista `)
+    }
 
 
 
 }
 
 //Funcion para la fecha = dias y semanas restantes                  REVISAR 
-function fecha(a,b){
-    const dias =365;
-    const semanas=52;
-
-let fechaXdias= a -365;
-let fechaXsemanas=0;
+function diasYSemanasRestantes(fechaUsuario) {
+    // Convierte la fecha ingresada por el usuario en un objeto Date
+    const fechaIngresada = new Date(fechaUsuario);
+    
+    // Verifica si la fecha ingresada es válida
+    if (isNaN(fechaIngresada)) {
+        return "Fecha inválida. Intente de nuevo con el formato correcto (YYYY-MM-DD).";
+    }
+    
+    // Se obtiene el 31 de diciembre del mismo año de la fecha ingresada
+    const finDeAnio = new Date(fechaIngresada.getFullYear(), 11, 31);
+    
+    // Definir la cantidad de milisegundos en un día
+    const unDia = 24 * 60 * 60 * 1000;
+    
+    // Calcula los días restantes hasta fin de año
+    const diasRestantes = Math.ceil((finDeAnio - fechaIngresada) / unDia);
+    
+    // Calcula las semanas restantes dividiendo los días entre 7 y redondeando hacia abajo
+    const semanasRestantes = Math.floor(diasRestantes / 7);
+    
+    return `Faltan ${diasRestantes} días y ${semanasRestantes} semanas para terminar el año.`;
 }
 
 //Variable para la entarda de los datos del menu 
@@ -88,63 +104,65 @@ do {
     //Menu
     opcion = Number(prompt(
         "1. Calcular la superficie de un rectángulo\n" +
-        "2. Cambiar km/h a m/h y mph/h\n" + 
+        "2. Cambiar km/h a m/h y mph/h\n" +
         "3. Calcular Factorial\n" +
-        "4. Calcular tabla de multiplicar\n" + 
-        "5. Calcular el Indice de masa corporal\n "
+        "4. Calcular tabla de multiplicar\n" +
+        "5. Calcular el Indice de masa corporal\n " +
+        "6. Calcula los dias y semanas restantes del año\n"
     ));
 
     //Condicion para que se ejecute el programa siemrpe y cuando este no sea el #7 = salir
     if (opcion != 7)
-     
 
-//Estructura de control condicional para ejecutar el programa y mensajes alucivos dependiendo de cada caso 
-    switch (opcion) {
 
-        case 1 :
-            a = parseFloat(prompt("Ingrese el ancho del rectángulo "));
-            b = parseFloat(prompt("Ingrese el alto del rectángulo"));
-            alert(`La superficie del rectángulo es de : ${anchoAltoRectangulo(a,b)}` );     
-            break;
+        //Estructura de control condicional para ejecutar el programa y mensajes alucivos dependiendo de cada caso 
+        switch (opcion) {
 
-            case 2 : 
-            a=Number(prompt("Ingrese su valor de km/H"));
-            alert (`Tu valor de km/h es igual a : ${velocidadAmetros(a)} m/h y tambien es igual a ${velocidadAmph(a)} mph/h`);
-            break;
+            case 1:
+                a = parseFloat(prompt("Ingrese el ancho del rectángulo "));
+                b = parseFloat(prompt("Ingrese el alto del rectángulo"));
+                alert(`La superficie del rectángulo es de : ${anchoAltoRectangulo(a, b)}`);
+                break;
 
-            case 3 : 
-            a=Number(prompt("Ingrese el valor para hacerle el factorial "));
-            alert(`El factorial de ${a} es: ${factorial(a)}`);
-            break;
+            case 2:
+                a = Number(prompt("Ingrese su valor de km/H"));
+                alert(`Tu valor de km/h es igual a : ${velocidadAmetros(a)} m/h y tambien es igual a ${velocidadAmph(a)} mph/h`);
+                break;
+
+            case 3:
+                a = Number(prompt("Ingrese el valor para hacerle el factorial "));
+                alert(`El factorial de ${a} es: ${factorial(a)}`);
+                break;
 
             case 4:
-                a=Number(prompt("Ingrese un numero para ver su tabla de multiplicar"));
+                a = Number(prompt("Ingrese un numero para ver su tabla de multiplicar"));
                 alert(tablaMultiplicar(a));
                 break;
 
-                case 5 : 
+            case 5:
                 a = parseFloat(prompt("Ingrese su peso"));
-                b=parseFloat(prompt("Ingrese su altura"));
-                alert(IMC(a,b));
+                b = parseFloat(prompt("Ingrese su altura"));
+                alert(IMC(a, b));
                 break;
+                
+                case 6:
+                    let fechaUsuario = prompt("Ingrese la fecha actual en formato YYYY-MM-DD:");
+                    alert(diasYSemanasRestantes(fechaUsuario));
+                    break;
+        
+                case 7:
+                    alert("Saliendo del programa...");
+                    break;
+        
+                default:
+                    alert("Opción no válida, intente nuevamente.");
 
-                case 6 : 
-
-}
-} while (opcion != 7){
+        }
+} while (opcion != 7) {
     alert("Saliendo del programa ")
 
 }
 
-// function diasYSemanasRestantes() {
-//     const hoy = new Date(); // Obtener la fecha actual
-//     const finDeAnio = new Date(hoy.getFullYear(), 11, 31); // 31 de diciembre del año actual
-    
-//     const unDia = 24 * 60 * 60; // Segundos en un día
-//     const diasRestantes = Math.ceil((finDeAnio - hoy) / (unDia * 1000)); // Calcular días restantes
-//     const semanasRestantes = Math.floor(diasRestantes / 7); // Calcular semanas restantes
-    
-//     console.log(`Faltan ${diasRestantes} días y ${semanasRestantes} semanas para terminar el año.`);
-// }
 
-// diasYSemanasRestantes();
+
+
