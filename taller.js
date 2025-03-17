@@ -135,3 +135,16 @@ do {
     alert("Saliendo del programa ")
 
 }
+
+// function diasYSemanasRestantes() {
+//     const hoy = new Date(); // Obtener la fecha actual
+//     const finDeAnio = new Date(hoy.getFullYear(), 11, 31); // 31 de diciembre del año actual
+    
+//     const unDia = 24 * 60 * 60; // Segundos en un día
+//     const diasRestantes = Math.ceil((finDeAnio - hoy) / (unDia * 1000)); // Calcular días restantes
+//     const semanasRestantes = Math.floor(diasRestantes / 7); // Calcular semanas restantes
+    
+//     console.log(`Faltan ${diasRestantes} días y ${semanasRestantes} semanas para terminar el año.`);
+// }
+
+// diasYSemanasRestantes();
